@@ -1,51 +1,29 @@
 <template>
-	<view class="content">
-        <image class="logo" src="../../static/logo.png"></image>
-		<view>
-            <text class="title">{{title}}</text>
-        </view>
+	<view>
+		<canvas style="width: 100vw;height: 100vh;" canvas-id="firstCanvas" id="firstCanvas"></canvas>
 	</view>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue';
-
-	export default Vue.extend({
+<script>
+	import Main from './game/main.js'
+	import { JJGame } from '@/uni_modules/JJ-GSdk/js_sdk/gameSdk';
+	export default{
 		data() {
 			return {
-				title: 'Hello'
+				game:null
 			}
 		},
 		onLoad() {
-
+			this.game = new JJGame(uni.createCanvasContext('firstCanvas'))
+			this.game.state.add('main', new Main())
+			this.game.state.start('main')
 		},
 		methods: {
 
 		}
-	});
+	}
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
 </style>
