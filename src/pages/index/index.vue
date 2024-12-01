@@ -5,6 +5,7 @@
 </template>
 
 <script>
+	import { State } from '@/uni_modules/JJ-GSdk/js_sdk/sdk/state';
 	import Main from './game/main.js'
 	import { JJGame } from '@/uni_modules/JJ-GSdk/js_sdk/gameSdk';
 	export default{
@@ -15,8 +16,9 @@
 		},
 		onLoad() {
 			this.game = new JJGame(uni.createCanvasContext('firstCanvas'))
-			this.game.state.add('main', new Main())
-			this.game.state.start('main')
+			let state = new State(30)
+			state.add('main', new Main(this.game))
+			state.start('main')
 		},
 		methods: {
 

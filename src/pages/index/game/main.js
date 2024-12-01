@@ -3,29 +3,26 @@ import { GameState } from '@/uni_modules/JJ-GSdk/js_sdk/interface/state'
  * 游戏主函数
  */
 export default class Main extends GameState {
-
   /**
    * 构造
    */
-  constructor() {
-    super()
+  constructor(game) {
+    super(game)
   }
   init() {
     console.log('初始化')
+    console.log(this.game)
   }
   preload() {
-    console.log('载入素材')
-    this.game.load.image('bg', '@/static/game/dice.png')
-    console.log(this.game);
+    this.game.load.image('little_game_button', '/static/game/suspend.png', 305, 698, 142, 155)
   }
 
   create() {
-    console.log('创建内容')
-    let back = game.add.image('bg',0, 0);
+    this.game.add.image('little_game_button',0, 0, 100, 100);
   }
 
   update () {
-    console.log('更新')
+    
   }
-
+  
 }

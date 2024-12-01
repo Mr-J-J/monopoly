@@ -1,4 +1,7 @@
+import { JJGame } from "../gameSdk";
+
 export interface StateLife {
+    game: JJGame;
     init: () => void;
     preload: () => void;
     create: () => void;
@@ -9,8 +12,9 @@ export interface StateContext {
     [key: string]: StateLife | GameState;
 }
 export class GameState {
-    constructor() {
-        
+    game: JJGame
+    constructor(game: JJGame) {
+        this.game = game;
     }
     // 初始化
     init() {
@@ -30,6 +34,6 @@ export class GameState {
     }
     // 渲染
     render() {
-        console.log('请实现render方法')
+        this.game.data.ctx.draw()
     }
 }

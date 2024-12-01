@@ -8,13 +8,9 @@ import { Physics } from './sdk/physics'
 import { Scale } from './sdk/scale'
 import { Sound } from './sdk/sound'
 import { Stage } from './sdk/stage'
-import { State } from './sdk/state'
 import { World } from './sdk/world'
 export class JJGame{
-	cvs: typeof uni.createCanvasContext
 	data: Data
-	// 场景管理对象
-	state: State
 	//游戏资源加载模块
 	load: Load
 	//游戏摄像机对象
@@ -35,11 +31,8 @@ export class JJGame{
 	particles: Particles		
 	//物理引擎系统
 	physics: Physics
-	constructor(CanvasContext: typeof uni.createCanvasContext){
-		// 画布
-		this.cvs = CanvasContext
-		this.data = new Data()
-		this.state = new State(this.data)
+	constructor(CanvasContext: UniApp.CanvasContext){
+		this.data = new Data(CanvasContext)
 		this.load = new Load(this.data)
 		this.camera = new Camera(this.data);	
 		this.add = new Add(this.data); 				

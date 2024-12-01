@@ -13,5 +13,6 @@ export class Load {
 			width:width,
 			height:height
 		};
+		return this.data.resource.images[key]
 	}
 }
