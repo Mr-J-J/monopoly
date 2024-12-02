@@ -1,4 +1,6 @@
 import { GameState } from '@/uni_modules/JJ-GSdk/js_sdk/interface/state'
+import { People } from './baseModel/people'
+import { Player } from './model/player'
 /**
  * 游戏主函数
  */
@@ -18,11 +20,10 @@ export default class Main extends GameState {
   }
 
   create() {
-    this.game.add.image('little_game_button',0, 0, 100, 100);
+    const player1 = new Player(this.game.data.resource.images['little_game_button'])
+    this.game.add.entity(player1)
   }
+  update(){
 
-  update () {
-    
   }
-  
 }

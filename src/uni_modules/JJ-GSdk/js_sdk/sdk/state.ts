@@ -17,9 +17,11 @@ export class State {
 	start(key: string){
 		this.state[key].init();
 		this.state[key].preload();
-		this.state[key].create();
+		this.state[key].create();// 创建游戏
+		this.state[key]._create();// _create为默认声明周期用来条用脚本start方法
 		this.id = this.requestAnimationFrame(()=>{
-			this.state[key].update();
+			this.state[key].update(); // 更新游戏
+			this.state[key]._update();// _update为默认声明周期用来条用脚本update方法
 			this.state[key].render();
 		})
 	}

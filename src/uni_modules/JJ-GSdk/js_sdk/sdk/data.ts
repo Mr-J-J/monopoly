@@ -1,3 +1,4 @@
+import { Entity } from "../model/entity";
 import { Resource } from "../interface/resource";
 
 export class Data{
@@ -6,7 +7,7 @@ export class Data{
     // 资源
     resource: Resource
     // 渲染队列
-    renderQueue: any[] = []
+    renderQueue: Entity[] = []
     constructor(ctx: UniApp.CanvasContext){
         this.resource = {
             images: {},

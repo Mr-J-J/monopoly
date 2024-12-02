@@ -1,13 +1,24 @@
 export interface Resource {
-    images:Record<string, Image>
+    images:Record<string, Material>
 }
-interface Image{
+export interface Material{
     path:string
     x:number
     y:number
     width:number
     height:number
 }
-export interface model{
-    
+export class Material implements Material{
+    path:string
+    x:number
+    y:number
+    width:number
+    height:number
+    constructor(path:string,x:number,y:number,width:number,height:number){
+        this.path = path
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+    }
 }
