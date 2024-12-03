@@ -6,7 +6,7 @@ import { Data } from "../sdk/data";
 import { Anims } from "../sdk/anims";
 
 export class Entity extends Item implements Script {
-    vector3: Vector3 = new Vector3(0,0,0,0,0);
+    vector3: Vector3 = new Vector3(0,0,0,0,0,0);
     material: Material = {} as Material;
     data: Data = {} as Data;
     show: boolean = true;

@@ -6,7 +6,7 @@
 
 <script>
 	import { State } from '@/uni_modules/JJ-GSdk/js_sdk/sdk/state';
-	import Main from './game/main.js'
+	import Main from './game/main'
 	import { JJGame } from '@/uni_modules/JJ-GSdk/js_sdk/gameSdk';
 	export default{
 		data() {
@@ -15,12 +15,14 @@
 			}
 		},
 		onLoad() {
-			uni.createSelectorQuery().in(this).select('#firstCanvas').boundingClientRect((data) => {
-				this.game = new JJGame(data)
-				let state = new State(30)
-				state.add('main', new Main(this.game))
-				state.start('main')
-			}).exec()
+			this.$nextTick(()=>{
+			    uni.createSelectorQuery().in(this).select('#firstCanvas').boundingClientRect((data) => {
+					this.game = new JJGame(data)
+					let state = new State(30)
+					state.add('main', new Main(this.game))
+					state.start('main')
+				}).exec()
+			})
 			
 		},
 		methods: {

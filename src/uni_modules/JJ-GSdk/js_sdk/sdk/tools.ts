@@ -32,4 +32,20 @@ export class Tools {
         } 
         
     }
+    /**
+     * 坐标换算
+     * @param { number } number 坐标值
+     * @param { (x|y) } type 坐标类型
+     * @description
+     * 所有换算均基于手机屏幕宽高为1080px，高度为1920px
+     */
+    coordinateTransform(number: number, type: string): number {
+        let num = 0;
+        if (type == 'x') {
+            num = number / 1080 * this.data.ctx_ele.width;
+        } else if (type == 'y') {
+            num = number / 1920 * this.data.ctx_ele.height;
+        }
+        return num;
+    }
 }

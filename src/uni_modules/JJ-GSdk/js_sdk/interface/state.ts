@@ -36,6 +36,8 @@ export class GameState {
     _create() {
         for (let i = 0; i < this.game.world.renderQueue.length; i++) {
             let item = this.game.world.renderQueue[i];
+            item.vector3.x = this.game.tools.coordinateTransform(item.vector3.x,'x')
+            item.vector3.y = this.game.tools.coordinateTransform(item.vector3.y,'y')
             item.Start();
         }
     }
@@ -51,7 +53,25 @@ export class GameState {
         for (let i = 0; i < this.game.world.renderQueue.length; i++) {
             let item = this.game.world.renderQueue[i];
             if(item.show && item.material && item.vector3){
-                this.game.data.ctx.drawImage(item.material.path, item.material.x, item.material.y, item.material.width, item.material.height,item.vector3.x, item.vector3.y, item.vector3.width, item.vector3.height)
+                if(item.material.type == 'image'){
+                    // 获取坐标
+                    const originX = item.vector3.x + item.vector3.origin.x
+                    const originY = item.vector3.y + item.vector3.origin.y
+                    // 角度旋转系数
+                    const ratio = Math.PI / 180
+                    // 定位到物体中心
+                    this.game.data.ctx.translate(originX, originY);
+                    this.game.data.ctx.rotate(item.vector3.rotation * ratio);
+                    this.game.data.ctx.translate(-originX, -originY);
+                    this.game.data.ctx.drawImage(item.material.path, item.material.x, item.material.y, item.material.width, item.material.height,item.vector3.x, item.vector3.y, item.vector3.width, item.vector3.height)
+                    this.game.data.ctx.translate(originX, originY);
+                    this.game.data.ctx.rotate(-item.vector3.rotation * ratio);
+                    this.game.data.ctx.translate(-originX, -originY);
+                }else if(item.material.type == 'color'){
+                    this.game.data.ctx.fillStyle = item.material.path;
+                    this.game.data.ctx.fillRect(item.vector3.x, item.vector3.y, item.vector3.width, item.vector3.height)
+                }
+                
             }
         }
         this.game.data.ctx.draw()
