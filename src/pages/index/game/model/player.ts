@@ -1,15 +1,14 @@
 import { Script } from "@/uni_modules/JJ-GSdk/js_sdk/base/script"
 import { People } from "../baseModel/people"
-import { Material } from "@/uni_modules/JJ-GSdk/js_sdk/interface/resource"
 export class Player extends People implements Script{
-    constructor(material: Material) {
-        super(material)
+    constructor() {
+        super();
     }
     public Start(): void {
-        this.vector3.x = 0;
-        this.vector3.y = 0;
+        this.material = this.data.resource.images['little_game_button']
     }
     public Update(): void {
         this.vector3.x += 1;
+        this.vector3.y += 1;
     }
 }

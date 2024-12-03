@@ -1,5 +1,4 @@
 import { GameState } from '@/uni_modules/JJ-GSdk/js_sdk/interface/state'
-import { People } from './baseModel/people'
 import { Player } from './model/player'
 /**
  * 游戏主函数
@@ -20,8 +19,12 @@ export default class Main extends GameState {
   }
 
   create() {
-    const player1 = new Player(this.game.data.resource.images['little_game_button'])
+    const player1 = new Player()
     this.game.add.entity(player1)
+    const player2 = new Player()
+    this.game.add.entity(player2)
+    // 对齐
+    this.game.tools.align([player1, player2], 'vertical', 'start')
   }
   update(){
 

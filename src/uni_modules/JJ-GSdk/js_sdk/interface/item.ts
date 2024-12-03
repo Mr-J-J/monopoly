@@ -1,4 +1,4 @@
-import { Material } from "./resource"
+
 export interface Rect {
     bottom: number
     height: number
@@ -11,7 +11,6 @@ export interface Rect {
 }
 export interface ItemInterFace {
     name: string
-    material: Material
 }
 export interface Vector3 {
     x: number

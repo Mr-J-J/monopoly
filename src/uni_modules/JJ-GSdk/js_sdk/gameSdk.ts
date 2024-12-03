@@ -1,3 +1,4 @@
+import { ctxEleInfo } from './interface/game'
 import { Add } from './sdk/add'
 import { Camera } from './sdk/camera'
 import { Data } from './sdk/data'
@@ -8,6 +9,7 @@ import { Physics } from './sdk/physics'
 import { Scale } from './sdk/scale'
 import { Sound } from './sdk/sound'
 import { Stage } from './sdk/stage'
+import { Tools } from './sdk/tools'
 import { World } from './sdk/world'
 export class JJGame{
 	data: Data
@@ -31,17 +33,20 @@ export class JJGame{
 	particles: Particles		
 	//物理引擎系统
 	physics: Physics
-	constructor(CanvasContext: UniApp.CanvasContext){
-		this.data = new Data(CanvasContext)
+	// 辅助工具
+	tools: Tools
+	constructor(ctxEleInfo: ctxEleInfo){
+		this.data = new Data(ctxEleInfo)
+		this.world = new World(this.data);
 		this.load = new Load(this.data)
 		this.camera = new Camera(this.data);	
-		this.add = new Add(this.data); 				
+		this.add = new Add(this.data,this.world); 				
 		this.input = new Input(this.data);
 		this.scale = new Scale(this.data);
 		this.sound = new Sound(this.data);
 		this.stage = new Stage(this.data);
-		this.world = new World(this.data);
 		this.particles = new Particles(this.data);
-		this.physics = new Physics(this.data);			
+		this.physics = new Physics(this.data);		
+		this.tools = new Tools(this.data);
 	}
 }

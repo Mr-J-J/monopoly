@@ -1,17 +1,19 @@
-import { Entity } from "../model/entity";
 import { Resource } from "../interface/resource";
+import { ctxEleInfo } from "../interface/game";
 
 export class Data{
     // 画布
     ctx: UniApp.CanvasContext
+    ctx_id: string
+    ctx_ele: ctxEleInfo
     // 资源
     resource: Resource
-    // 渲染队列
-    renderQueue: Entity[] = []
-    constructor(ctx: UniApp.CanvasContext){
+    constructor(ctxEleInfo: ctxEleInfo){
         this.resource = {
             images: {},
         }
-        this.ctx = ctx
+        this.ctx = uni.createCanvasContext(ctxEleInfo.id)
+        this.ctx_id = ctxEleInfo.id
+        this.ctx_ele = ctxEleInfo
     }
 }

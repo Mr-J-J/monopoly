@@ -15,10 +15,13 @@
 			}
 		},
 		onLoad() {
-			this.game = new JJGame(uni.createCanvasContext('firstCanvas'))
-			let state = new State(30)
-			state.add('main', new Main(this.game))
-			state.start('main')
+			uni.createSelectorQuery().in(this).select('#firstCanvas').boundingClientRect((data) => {
+				this.game = new JJGame(data)
+				let state = new State(30)
+				state.add('main', new Main(this.game))
+				state.start('main')
+			}).exec()
+			
 		},
 		methods: {
 
