@@ -15,7 +15,7 @@ export default class Main extends GameState {
     console.log(this.game)
   }
   preload() {
-    this.game.load.image('yun', '/static/game/Zuo_Yun.png', 0, 0, 375, 812)
+    this.game.load.image('Stars_shine_brightly', '/static/game/Stars_shine_brightly.png', 0, 0, 750, 1800)
     // 小游戏
     this.game.load.image('little_game_button', '/static/game/suspend.png', 305, 698, 142, 155)
     // 锦绣公园
@@ -209,18 +209,113 @@ export default class Main extends GameState {
     this.game.load.image('yellow_building_five', '/static/game/suspend.png', 682, 829, 102, 78)
     // 黄色车站
     this.game.load.image('yellow_station', '/static/game/suspend.png', 1423, 822, 90, 72)
+    // 戚安安
+    this.game.load.image('yellow_qianan', '/static/game/Human_avatar.png', 0, 1, 130, 140)
+    this.game.load.image('red_qianan', '/static/game/Human_avatar.png', 0, 139, 130, 140)
+    this.game.load.image('green_qianan', '/static/game/Human_avatar.png', 0, 277, 130, 140)
+    this.game.load.image('blue_qianan', '/static/game/Human_avatar.png', 131, 1, 130, 140)
+
+    // 白狐
+    this.game.load.image('yellow_fox', '/static/game/Human_avatar.png', 262, 1, 100, 130)
+    this.game.load.image('red_fox', '/static/game/Human_avatar.png', 368, 1, 100, 130)
+    this.game.load.image('green_fox', '/static/game/Human_avatar.png', 368, 135, 100, 130)
+    this.game.load.image('blue_fox', '/static/game/Human_avatar.png', 368, 268, 100, 130)
+
+    // 练习生
+    this.game.load.image('yellow_trainees', '/static/game/Human_avatar.png', 473, 1, 100, 130)
+    this.game.load.image('red_trainees', '/static/game/Human_avatar.png', 473, 135, 100, 130)
+    this.game.load.image('green_trainees', '/static/game/Human_avatar.png', 473, 268, 100, 130)
+    this.game.load.image('blue_trainees', '/static/game/Human_avatar.png', 576, 1, 100, 130)
+
+    // 野蛮人
+    this.game.load.image('yellow_barbarian', '/static/game/Human_avatar.png', 576, 135, 120, 130)
+    this.game.load.image('red_barbarian', '/static/game/Human_avatar.png', 682, 1, 120, 130)
+    this.game.load.image('green_barbarian', '/static/game/Human_avatar.png', 576, 267, 120, 130)
+    this.game.load.image('blue_barbarian', '/static/game/Human_avatar.png', 699, 134, 120, 130)
+
+    // 熊九九
+    this.game.load.image('yellow_xiongjiujiu', '/static/game/Human_avatar.png', 802, 1, 120, 130)
+    this.game.load.image('red_xiongjiujiu', '/static/game/Human_avatar.png', 698, 265, 120, 130)
+    this.game.load.image('green_xiongjiujiu', '/static/game/Human_avatar.png', 819, 132, 120, 130)
+    this.game.load.image('blue_xiongjiujiu', '/static/game/Human_avatar.png', 924, 1, 120, 130)
+
+    // 巨剑侠
+    this.game.load.image('yellow_giant_swordsman', '/static/game/Human_avatar.png', 820, 263, 120, 130)
+    this.game.load.image('red_giant_swordsman', '/static/game/Human_avatar.png', 941, 132, 120, 130)
+    this.game.load.image('green_giant_swordsman', '/static/game/Human_avatar.png', 1046, 1, 120, 130)
+    this.game.load.image('blue_giant_swordsman', '/static/game/Human_avatar.png', 941, 262, 120, 130)
+
+    // 学生
+    this.game.load.image('green_student', '/static/game/Human_avatar.png', 1063, 132, 100, 130)
+    this.game.load.image('blue_student', '/static/game/Human_avatar.png', 1168, 1, 100, 130)
+    this.game.load.image('yellow_student', '/static/game/Human_avatar.png', 446, 401, 130, 100)
+    this.game.load.image('red_student', '/static/game/Human_avatar.png', 576, 401, 130, 100)
+
+    // 刀客
+    this.game.load.image('yellow_assassin', '/static/game/Human_avatar.png', 1274, 1, 100, 130)
+    this.game.load.image('red_assassin', '/static/game/Human_avatar.png', 1274, 132, 100, 130)
+    this.game.load.image('green_assassin', '/static/game/Human_avatar.png', 1378, 260, 100, 130)
+    this.game.load.image('blue_assassin', '/static/game/Human_avatar.png', 1378, 1, 100, 130)
+
+    // 大刀手
+    this.game.load.image('yellow_broadswordman', '/static/game/Human_avatar.png', 1379, 130, 100, 130)
+    this.game.load.image('red_broadswordman', '/static/game/Human_avatar.png', 1485, 1, 100, 130)
+    this.game.load.image('green_broadswordman', '/static/game/Human_avatar.png', 1484, 258, 100, 130)
+    this.game.load.image('blue_broadswordman', '/static/game/Human_avatar.png', 1488, 129, 100, 130)
+
+    // 剑士
+    this.game.load.image('yellow_swordsman', '/static/game/Human_avatar.png', 1592, 1, 100, 130)
+    this.game.load.image('red_swordsman', '/static/game/Human_avatar.png', 1591, 258, 100, 130)
+    this.game.load.image('green_swordsman', '/static/game/Human_avatar.png', 1595, 129, 100, 130)
+    this.game.load.image('blue_swordsman', '/static/game/Human_avatar.png', 1697, 1, 100, 130)
+
+    // 武士
+    this.game.load.image('yellow_warrior', '/static/game/Human_avatar.png', 1593, 386, 105, 120)
+    this.game.load.image('red_warrior', '/static/game/Human_avatar.png', 1802, 1, 105, 120)
+    this.game.load.image('green_warrior', '/static/game/Human_avatar.png', 1802, 124, 105, 120)
+    this.game.load.image('blue_warrior', '/static/game/Human_avatar.png', 1802, 245, 105, 120)
+ 
+    // 西部牛仔
+    this.game.load.image('yellow_cowboy', '/static/game/Human_avatar.png', 131, 140, 115, 130)
+    this.game.load.image('red_cowboy', '/static/game/Human_avatar.png', 131, 273, 115, 130)
+    this.game.load.image('green_cowboy', '/static/game/Human_avatar.png', 249, 140, 115, 130)
+    this.game.load.image('blue_cowboy', '/static/game/Human_avatar.png', 249, 273, 115, 130)
+
+    // 书生
+    this.game.load.image('yellow_scholar', '/static/game/Human_avatar.png', 1063, 261, 100, 130)
+    this.game.load.image('red_scholar', '/static/game/Human_avatar.png', 1168, 261, 100, 130)
+    this.game.load.image('green_scholar', '/static/game/Human_avatar.png', 1169, 131, 100, 130)
+    this.game.load.image('blue_scholar', '/static/game/Human_avatar.png', 1273, 261, 100, 130)
+
+    // 火铳手
+    this.game.load.image('yellow_firecracker', '/static/game/Human_avatar.png', 196, 406, 125, 100)
+    this.game.load.image('red_firecracker', '/static/game/Human_avatar.png', 321, 406, 125, 100)
+    this.game.load.image('green_firecracker', '/static/game/Human_avatar.png', 1700, 129, 100, 125)
+    this.game.load.image('blue_firecracker', '/static/game/Human_avatar.png', 1700, 254, 100, 125)
+
+    // 小瓶子
+    this.game.load.image('yellow_little_bottle', '/static/game/Human_avatar.png', 706, 397, 125, 110)
+    this.game.load.image('red_little_bottle', '/static/game/Human_avatar.png', 831, 394, 125, 110)
+    this.game.load.image('green_little_bottle', '/static/game/Human_avatar.png', 956, 393, 125, 110)
+    this.game.load.image('blue_little_bottle', '/static/game/Human_avatar.png', 1701, 380, 110, 125)
+
+    // 猫咪
+    this.game.load.image('yellow_cat', '/static/game/Human_avatar.png', 1083, 392, 125, 110)
+    this.game.load.image('red_cat', '/static/game/Human_avatar.png', 1211, 392, 125, 110)
+    this.game.load.image('green_cat', '/static/game/Human_avatar.png', 1339, 392, 125, 110)
+    this.game.load.image('blue_cat', '/static/game/Human_avatar.png', 1467, 389, 125, 110)
   }
 
   create() {
     const info = this.game.data.ctx_ele
-    this.game.add.color('skyblue',0,0,info.width,info.height)
-    this.game.add.image('random_events_five', 100, 0,100,100,0)
-    this.game.add.image('random_events_five', 100, 0,100,100,15)
-    this.game.add.image('random_events_five', 100, 0,100,100,25)
-    this.game.add.image('random_events_five', 100, 0,100,100,45)
-    this.game.add.image('random_events_five', 100, 0,100,100,65)
-    this.game.add.image('random_events_five', 100, 0,100,100,75)
-    this.game.add.image('random_events_five', 100, 0,100,100,90)
+    this.game.add.image('Stars_shine_brightly',0,0,info.width,info.height)
+    this.game.add.image('random_events_five', 100, 100,100,100,0)
+    this.game.add.image('random_events_five', 100, 100,100,100,15)
+    this.game.add.image('random_events_five', 100, 100,100,100,25)
+    this.game.add.image('random_events_five', 100, 100,100,100,45)
+    this.game.add.image('random_events_five', 100, 100,100,100,65)
+    this.game.add.image('random_events_five', 100, 100,100,100,75)
+    this.game.add.image('random_events_five', 100, 100,100,100,90)
   }
   update(){
 
