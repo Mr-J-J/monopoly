@@ -1,5 +1,7 @@
 import { GameState } from '@/uni_modules/JJ-GSdk/js_sdk/interface/state'
 import { JJGame } from '@/uni_modules/JJ-GSdk/js_sdk/gameSdk'
+import { StartBlock } from './model/block/startBlock'
+import { LiteGame } from './model/block/liteGame'
 /**
  * 游戏主函数
  */
@@ -309,13 +311,8 @@ export default class Main extends GameState {
   create() {
     const info = this.game.data.ctx_ele
     this.game.add.image('Stars_shine_brightly',0,0,info.width,info.height)
-    this.game.add.image('random_events_five', 100, 100,100,100,0)
-    this.game.add.image('random_events_five', 100, 100,100,100,15)
-    this.game.add.image('random_events_five', 100, 100,100,100,25)
-    this.game.add.image('random_events_five', 100, 100,100,100,45)
-    this.game.add.image('random_events_five', 100, 100,100,100,65)
-    this.game.add.image('random_events_five', 100, 100,100,100,75)
-    this.game.add.image('random_events_five', 100, 100,100,100,90)
+    this.game.add.entity(new StartBlock())
+
   }
   update(){
 

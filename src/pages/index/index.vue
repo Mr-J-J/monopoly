@@ -18,7 +18,7 @@
 			this.$nextTick(()=>{
 			    uni.createSelectorQuery().in(this).select('#firstCanvas').boundingClientRect((data) => {
 					this.game = new JJGame(data)
-					let state = new State(30)
+					let state = new State(60)
 					state.add('main', new Main(this.game))
 					state.start('main')
 				}).exec()
