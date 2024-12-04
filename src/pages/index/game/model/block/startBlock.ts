@@ -17,6 +17,6 @@ export class StartBlock extends Block implements Script {
         this.material = this.data.resource.images['starting_point']
     }
     Update(){
-
+        this.vector3.rotation += 1;
     }
 }

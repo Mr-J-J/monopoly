@@ -312,7 +312,11 @@ export default class Main extends GameState {
     const info = this.game.data.ctx_ele
     this.game.add.image('Stars_shine_brightly',0,0,info.width,info.height)
     this.game.add.entity(new StartBlock())
-
+    this.game.add.entity(new StartBlock())
+    this.game.add.entity(new StartBlock())
+    this.game.add.entity(new StartBlock())
+    this.game.add.entity(new StartBlock())
+    this.game.add.entity(new StartBlock())
   }
   update(){
 

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<canvas style="width: 100vw;height: 100vh;" canvas-id="firstCanvas" id="firstCanvas"></canvas>
+		<canvas style="width: 100vw;height: 100vh;transform: translate3d(0,0,0);" canvas-id="firstCanvas" id="firstCanvas"></canvas>
 	</view>
 </template>
 
