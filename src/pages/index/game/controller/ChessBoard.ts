@@ -1,4 +1,5 @@
 import { Block } from "../baseModel/block"
+import { IPlayerRole } from "../interface/player"
 import { BlankBlock } from "../model/block/blankBlock"
 import { BusBlock } from "../model/block/busBlock"
 import { GameBlock } from "../model/block/gameBlock"
@@ -36,6 +37,8 @@ import { Ice } from "../model/land/ice"
 import { IceVertical } from "../model/land/iceVertical"
 import { Money } from "../model/land/money"
 import { Player } from "../model/player/player"
+import { AudioCol } from "./Audio"
+import { PlayerFactory } from "./PlayerFactory"
 
 /**
  * 棋盘控制器
@@ -46,11 +49,15 @@ export class ChessBoard {
     screen: Screen;
     tables: Tables;
     gameDesk: GameDesk;
-    constructor(query: UniNamespace.SelectorQuery) {
+    PlayerFactory: PlayerFactory
+    Audio: AudioCol
+    constructor(PlayerFactory: PlayerFactory,audio: AudioCol,query: UniNamespace.SelectorQuery) {
         this.query = query
+        this.Audio = audio
+        this.PlayerFactory = PlayerFactory
         this.screen = new Screen('screen',this.query)
         this.tables = new Tables('tables',this.query)
-        this.gameDesk = new GameDesk('gameDesk',this.query)
+        this.gameDesk = new GameDesk('gameDesk',this.PlayerFactory,this.Audio,this.query)
         
         this.init()
     }
@@ -116,5 +123,42 @@ export class ChessBoard {
         this.lists.push(new UnknowBlock('unknow-block-4',money3,this.query))
         this.lists.push(new GiftBlock('gift-block-3',flower3,this.query))
         this.lists.push(new LiteBlock20(building4,this.query))
+    }
+    /**
+     * 设置当前的玩家
+     */
+    setPlayer(player:Player){
+        this.PlayerFactory.setNowPlayer(player)
+        if(player.role == IPlayerRole.Player){
+            this.gameDesk.SieveCup.start()
+        }
+    }
+    /**
+     * 掷筛中
+     */
+    async throwSieveCup(){
+       const num = await this.gameDesk.throwSieveCup()
+       await this.movePlayer(num)
+    }
+    /**
+     * 玩家在棋盘上移动
+     */
+    async movePlayer(num:number){
+        // 查询当前玩家所在位置
+        let nowNum = 0
+       for(let i = 0;i < this.lists.length;i++){
+        if(this.PlayerFactory.NowPlayer.block == this.lists[i]){
+            nowNum = i
+            break
+        }
+       }
+       // 移动
+       for(let i = 0;i <= num;i++){
+        nowNum++
+        if(nowNum >= this.lists.length){
+            nowNum = 0
+        }
+        await this.PlayerFactory.NowPlayer.go(this.lists[nowNum])
+       }
     }
 }

@@ -1,6 +1,7 @@
 import { Block } from "../baseModel/block";
 import { IPlayerRole, IPlayerStatus } from "../interface/player";
 import { Player } from "../model/player/player";
+import { AudioCol } from "./Audio";
 
 /**
  * 玩家工厂
@@ -11,6 +12,7 @@ export class PlayerFactory {
     query: UniNamespace.SelectorQuery
     PlayerList: Player[] = [];
     NowPlayer: Player = {} as Player;
+    Audio: AudioCol;
     //皮肤列表
     MaterialList: string[] = [
         'https://btxgdqn.oliyuno.com/dafuweng/character/assassin_blue.png',
@@ -18,15 +20,16 @@ export class PlayerFactory {
         'https://btxgdqn.oliyuno.com/dafuweng/character/broadswordman_blue.png',
         'https://btxgdqn.oliyuno.com/dafuweng/character/cowboy_green.png',
     ];
-    constructor(number: number,query: UniNamespace.SelectorQuery) {
+    constructor(number: number,audio: AudioCol,query: UniNamespace.SelectorQuery) {
         this.query = query;
+        this.Audio = audio;
         for (let i = 0; i < number; i++) {
             this.PlayerList.push({} as Player);
             let role = IPlayerRole.Robot;
             if (i == 0) {
                 role = IPlayerRole.Player;
             }
-            this.PlayerList[i] = new Player('player'+i,'玩家'+i,this.MaterialList[i],role,query);
+            this.PlayerList[i] = new Player('player'+i,'玩家'+i,this.MaterialList[i],role,this.Audio,query);
         }
     }
     setNowPlayer(player: Player) {

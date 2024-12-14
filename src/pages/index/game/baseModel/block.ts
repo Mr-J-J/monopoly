@@ -17,4 +17,7 @@ export class Block extends BaseModel {
         this.status = status
         this.Material = this.statusBg[this.status]
     }
+    event(){
+        
+    }
 }

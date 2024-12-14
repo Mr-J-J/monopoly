@@ -53,7 +53,14 @@
 						<view class="giftCards" id="giftCards"></view>
 					</view>
 					<view class="gameDesk" id="gameDesk" :style="{'background': 'url('+game.ChessBoard.gameDesk.Material+') no-repeat', 'background-size': '100% 100%'}">
-
+						<view class="now-player" :style="{'background': 'url('+game.PlayerFactory.NowPlayer.Material+') no-repeat', 'background-size': '100% 100%'}"></view>
+						<view class="sieve-cup" @click="game.dice()" :style="{
+							'background': 'url('+game.ChessBoard.gameDesk.SieveCup.Material+') no-repeat', 
+							'background-size': '100% 100%',
+							'transition': 'all '+game.ChessBoard.gameDesk.SieveCup.duration+'s linear',
+							'transform': 'scale('+game.ChessBoard.gameDesk.SieveCup.info.scale+')',
+						}" id="sieveCup">
+						</view>
 					</view>
 				</view>
 				<view class="desk-center-right">
@@ -262,6 +269,22 @@
 	margin-top: 20rpx;
 	width: 330rpx;
 	height: 250rpx;
+	position: relative;
+}
+.sieve-cup{
+	height: 120rpx;
+	width: 110rpx;
+	position: absolute;
+	right: 30rpx;
+	bottom: 60rpx;
+	z-index: 1;
+}
+.now-player{
+	height: 150rpx;
+	width: 120rpx;
+	position: absolute;
+	left: 10rpx;
+	top: 10rpx;
 }
 .randomCards{
 	height: 240rpx;

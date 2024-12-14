@@ -1,6 +1,8 @@
 import { Block } from "../../baseModel/block";
 import { Item } from "../../baseModel/item";
+import { AudioCol } from "../../controller/Audio";
 import { IPlayerRole, IPlayerStatus } from "../../interface/player";
+import { sleep } from "../../tools/tools";
 
 /**
  * 玩家
@@ -11,12 +13,17 @@ export class Player extends Item {
     Material: string;
     role: IPlayerRole;
     Status: IPlayerStatus = IPlayerStatus.stop;
+    Audio: AudioCol;
+    // 矫正位置
     rectifyX: number = 0;
     rectifyY: number = -20;
     // 动画速度
     duration: number = 0.5;
-    constructor(id: string,name:string, Material: string, role: IPlayerRole, query: UniNamespace.SelectorQuery) {
+    // 在什么方块上
+    block: Block = {} as Block;
+    constructor(id: string,name:string, Material: string, role: IPlayerRole, audio:AudioCol,query: UniNamespace.SelectorQuery) {
         super(id, query);
+        this.Audio = audio;
         this.Material = Material;
         this.role = role;
         this.name = name;
@@ -43,8 +50,10 @@ export class Player extends Item {
         this.Status = IPlayerStatus.stop;
         this.info.Zindex = 1;
     }
-    go(block: Block) {
+    async go(block: Block) {
         this.Status = IPlayerStatus.run;
+        sleep(500)
+        this.Audio.playMultipleTimes('/static/game/music/jump.mp3', 1, 0.5);
         this.duration = 0.2;
         const firstX = (this.info.x+block.info.left)/2;
         const firstY = this.info.y - 80;
@@ -53,15 +62,17 @@ export class Player extends Item {
         const lastY = y-this.info.height/2+this.rectifyY;
         this.info.x = firstX;
         this.info.y = firstY;
-        setTimeout(() => {
-            this.info.x = lastX;
-            this.info.y = lastY;
-        },this.duration * 1000)
+        await sleep(this.duration * 1000);
+        this.info.x = lastX;
+        this.info.y = lastY;
+        await sleep(this.duration * 1000);
+        this.block = block;
         this.Status = IPlayerStatus.stop;
     }
     move(block: Block) {
         const {x, y} = block.getCenter();
         this.info.x = x-this.info.width/2+this.rectifyX;
         this.info.y = y-this.info.height/2+this.rectifyY;
+        this.block = block;
     }
 }
