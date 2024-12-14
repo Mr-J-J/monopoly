@@ -1,6 +1,6 @@
 import { BaseModel } from "./baseModel";
 
-export class Land extends BaseModel {
+export class CardModel extends BaseModel {
     Material: string = ''
     constructor(id: string,query: UniNamespace.SelectorQuery) {
         super()

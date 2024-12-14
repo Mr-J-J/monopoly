@@ -1,22 +1,14 @@
-import { Script } from "@/uni_modules/JJ-GSdk/js_sdk/base/script";
-import { Block } from "@/pages/index/game/baseModel/block";
+import { Block } from "../../baseModel/block";
+import { IBlockStatus } from "../../interface/block";
 
-
-/**
- * 开始方块类
- */
-export class StartBlock extends Block implements Script {
-    constructor() {
-        super();
+export class StartBlock extends Block {
+    status = IBlockStatus.off;
+    statusBg = {
+        on: 'https://btxgdqn.oliyuno.com/dafuweng/block/starting_point_narrow.png',
+        off: 'https://btxgdqn.oliyuno.com/dafuweng/block/starting_point.png'
     }
-    // 触发事件
-    event(){}
-    Start(){
-        this.vector3.x = 100;
-        this.vector3.y = 30;
-        this.material = this.data.resource.images['starting_point']
-    }
-    Update(){
-        this.vector3.rotation += 1;
+    Material = 'https://btxgdqn.oliyuno.com/dafuweng/block/starting_point.png'
+    constructor(query: UniNamespace.SelectorQuery){
+        super('start-block',query);
     }
 }
