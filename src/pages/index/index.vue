@@ -46,7 +46,31 @@
 				</view>
 				<view class="desk-center-center">
 					<view class="screen" id="screen" :style="{'background': 'url('+game.ChessBoard.screen.Material+') no-repeat', 'background-size': '100% 100%'}">
-						
+						<template v-if="playerList&&playerList.length>0">
+							<view class="sreen-item" v-for="(item,index) in playerList" :key="index" :id="'playerSreen'+index" :style="{'background': 'url('+item.SkinInfo.ScoreboardBg+') no-repeat', 'background-size': '100% 100%'}">
+								<view class="avatar" :style="{'background': 'url('+item.avatar+') no-repeat', 'background-size': '100% 100%'}"></view>
+								<view class="name">{{ item.name }}</view>
+								<view class="money-icon"></view>
+								<view class="money">{{ item.money }}</view>
+								<view class="sreen-item-border"
+									:style="{
+										'background': 'url('+item.SkinInfo.ScoreBoardBorder+') no-repeat', 
+										'background-size': '100% 100%',
+										'opacity': item.Status=='stop'?'0':'1'
+									}"
+								></view>
+								<view class="sreen-item-money-box">
+									<view class="sreen-item-money"
+									v-for="(item2,index2) in item.screen" :key="index2"
+									:id="'screen'+index2+item.name"
+									:style="{
+										'transform': 'translateX('+item2.x+'px) translateY('+item2.y+'px)',
+										'opacity': item2.opacity
+									}"
+									></view>
+								</view>
+							</view>
+						</template>
 					</view>
 					<view class="tables" id="tables"  :style="{'background': 'url('+game.ChessBoard.tables.Material+') no-repeat', 'background-size': '100% 100%'}">
 						<view class="randomCards" id="randomCards"></view>
@@ -122,32 +146,50 @@
 				'opacity': item.info.x ? 1 : 0
 				}"
 		>
-		<view class="name-title">{{ item.name }}</view>
+			<view class="name-title">{{ item.name }}</view>
 		</view>
+		<build-pop v-if="game.PlayerFactory.NowPlayer.block.UI.Name == 'build-pop'" :show="game.PlayerFactory.NowPlayer.block.UI.Show" :title="game.PlayerFactory.NowPlayer.block.Name" :money="game.PlayerFactory.NowPlayer.block.Land.money" @buy="buy" @cancel="cancel"></build-pop>
 	</view>
 </template>
 
 <script>
 	import { Main } from './game/main'
+	import buildPop from './component/buildPop.vue'
 	export default{
 		data() {
 			return {
-				game: null
+				game: null,
+				playerList: null
 			}
+		},
+		components: {
+		    buildPop
 		},
 		onLoad() {
 			this.game = new Main(uni.createSelectorQuery().in(this))
 			setTimeout(() => {
 				this.$nextTick(()=>{
 					this.game.init()
+					this.playerList = this.game.PlayerFactory.PlayerList
+					//强制刷新
+					this.$forceUpdate()
 				})
 			}, 1000);
-			console.log(this.game)
-			//强制刷新
-			this.$forceUpdate()
 		},
 		methods: {
-
+			//buildPop
+			buy() {
+				this.game.PlayerFactory.NowPlayer.buyBuild()
+				setTimeout(() => {
+					this.game.PlayerFactory.NowPlayer.block.UI.Show = false
+				}, 500);
+			},
+			//buildPop
+			cancel() {
+				setTimeout(() => {
+					this.game.PlayerFactory.NowPlayer.block.UI.Show = false
+				}, 500);
+			}
 		}
 	}
 </script>
@@ -256,6 +298,11 @@
 	margin-top: 10rpx;
 	width: 350rpx;
 	height: 250rpx;
+	display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+	padding-top: 10rpx;
 }
 .tables{
 	margin-top: 5rpx;
@@ -321,5 +368,86 @@
     align-items: center;
     background: black;
     border-radius: 25rpx;
+}
+
+.sreen-item{
+	width: 80%;
+	height: 30rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 10rpx;
+	position: relative;
+}
+.sreen-item-border{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120%;
+	animation: scale 1s infinite;
+}
+.avatar{
+	width: 30rpx;
+	height: 30rpx;
+	border-radius: 50%;
+}
+.name{
+	background: rgba(0, 0, 0, 0.437);
+	color: white;
+	border-radius: 25rpx;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18rpx;
+	height: 100%;
+	width: 40%;
+}
+.money{
+	background: rgba(0, 0, 0, 0.437);
+	color: white;
+	border-radius: 25rpx;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18rpx;
+	height: 100%;
+	width: 40%;
+}
+.money-icon{
+	width: 25rpx;
+	height: 30rpx;
+	background: url('/static/game/matching_list/money_icon.png') no-repeat;
+	background-size: 100% 100%;
+}
+.sreen-item-money-box{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+}
+.sreen-item-money{
+	background: rgba(0, 0, 0, 0.437);
+	background-size: 100% 100%;
+	width: 100rpx;
+	height: 100rpx;
+	transition: all 0.2s linear;
+	position: absolute;
+	left: 0rpx;
+	top: 0rpx;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1.1);
+    }
 }
 </style>

@@ -1,10 +1,11 @@
 // h5音频控制器
 export class AudioCol {
     audio: UniApp.InnerAudioContext;
-    playCount: number;
+    volume: number;
     constructor() {
         this.audio = uni.createInnerAudioContext();
-        this.playCount = 0
+        this.volume = 0
+        this.audio.volume = this.volume;
     }
     play(src: string) {
         this.audio.src = src;
@@ -25,11 +26,12 @@ export class AudioCol {
      * @param {number} interval - 两次播放之间的间隔时间（毫秒）
      */
     async playMultipleTimes(src: string, times: number, interval: number) {
-        
+        let self = this;
         // 定义一个函数来播放单次音频
         function playOnce() {
             let audio:UniNamespace.InnerAudioContext|null = uni.createInnerAudioContext();
 			audio.src = src;
+            audio.volume = self.volume;
             audio.play();
             // 在音频播放结束后销毁audio对象
             audio.onEnded = function() {

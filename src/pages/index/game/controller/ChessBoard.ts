@@ -134,6 +134,14 @@ export class ChessBoard {
         }
     }
     /**
+     * 切换玩家
+     */
+    handoffPlayer(){
+        // 下一个玩家
+        const nextPlayer = this.PlayerFactory.getNextPlayer()
+        this.setPlayer(nextPlayer)
+    }
+    /**
      * 掷筛中
      */
     async throwSieveCup(){
@@ -153,12 +161,18 @@ export class ChessBoard {
         }
        }
        // 移动
-       for(let i = 0;i <= num;i++){
-        nowNum++
+       for(let i = 0;i < num;i++){
+        if(this.PlayerFactory.NowPlayer.isForward){
+            nowNum++
+        }else{
+            nowNum--
+        }
         if(nowNum >= this.lists.length){
             nowNum = 0
         }
         await this.PlayerFactory.NowPlayer.go(this.lists[nowNum])
        }
+       // 执行玩家当前格子的功能
+       await this.PlayerFactory.NowPlayer.runEvent()
     }
 }

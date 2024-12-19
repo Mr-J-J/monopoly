@@ -14,21 +14,26 @@ export class Main {
         this.Audio.loopPlay('/static/game/music/bg.m4a')
         this.PlayerFactory = new PlayerFactory(3,this.Audio,query)
         this.ChessBoard = new ChessBoard(this.PlayerFactory,this.Audio,query)
-        
     }
     async init(){
         //所有玩家放到开始位置
         this.PlayerFactory.moveAll(this.ChessBoard.lists[0])
         this.ChessBoard.setPlayer(this.PlayerFactory.PlayerList[0])
+        // 开启机器人监听器
+        this.PlayerFactory.robotRollDice(async ()=>{
+            if(this.ChessBoard.gameDesk.SieveCup.Status == 'stop' && this.PlayerFactory.NowPlayer.role != 'player'){
+                await this.ChessBoard.throwSieveCup()
+                // this.ChessBoard.handoffPlayer()
+            }
+        })
         await sleep(2000)
-        // await this.PlayerFactory.NowPlayer.go(this.ChessBoard.lists[1])
     }
     //点击投筛盅
     async dice(){
-        if(this.PlayerFactory.NowPlayer.role != 'player'){
+        if(this.PlayerFactory.NowPlayer.role != 'player' || this.ChessBoard.gameDesk.SieveCup.Status != 'start'){
             return
         }
         await this.ChessBoard.throwSieveCup()
-
+        // this.ChessBoard.handoffPlayer()
     }
 }

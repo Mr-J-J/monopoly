@@ -65,7 +65,7 @@ export class SieveCup extends Item {
             this.Material = this.aimationList[i];
             await sleep(this.duration * 1000);
         }
-        this.Material = this.numberList[number];
+        this.Material = this.numberList[number-1];
         this.number = number;
         this.Status = SieveCupType.stop;
     }

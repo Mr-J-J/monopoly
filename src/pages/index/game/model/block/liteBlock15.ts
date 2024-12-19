@@ -1,6 +1,7 @@
 import { Block } from "../../baseModel/block";
 import { Land } from "../../baseModel/land";
 import { IBlockStatus } from "../../interface/block";
+import { BuildPop } from "../ui/buildPop";
 
 export class LiteBlock15 extends Block {
     status = IBlockStatus.off;
@@ -12,5 +13,6 @@ export class LiteBlock15 extends Block {
     constructor(land: Land,query: UniNamespace.SelectorQuery){
         super('lite-block-15', query);
         this.Land = land;
+        this.UI = new BuildPop()
     }
 }
